@@ -1,0 +1,47 @@
+{
+  "FreeCodeCamp/FreeCodeCamp": {
+    "userBlacklistForPR": ["greenkeeperio-bot", "QuincyLarson", "BerkeleyTrue"],
+    "actions": ["opened", "reopened", "synchronize"],
+    "repoContribPath": "/blob/staging/CONTRIBUTING.md",
+    "rules": {
+      "critical": {
+        "blacklistedBaseBranchNames": ["master"],
+        "blacklistedHeadBranchNames": ["master", "staging"],
+        "allowedFileNames": []
+      },
+      "allowedBranchNames": ["fix/", "feature/", "add/", "new/", "audit/"],
+      "closeKeywords": ["close", "closes", "closed", "fix", "fixes", "fixed", "resolve", "resolves", "resolved"],
+      "maxCommitCount": 1
+    }
+  },
+  "FreeCodeCamp/wiki": {
+    "userBlacklistForPR": ["Rafase282"],
+    "actions": ["opened", "reopened", "synchronize"],
+    "repoContribPath": "/blob/master/.github/CONTRIBUTING.md",
+    "rules": {
+      "critical": {
+        "blacklistedBaseBranchNames": [],
+        "blacklistedHeadBranchNames": [],
+        "allowedFileNames": ["[\\w\\d-]+\\.md$"]
+      },
+      "allowedBranchNames": [],
+      "closeKeywords": ["close", "closes", "closed", "fix", "fixes", "fixed", "resolve", "resolves", "resolved"],
+      "maxCommitCount": 1
+    }
+  },
+  "bugron/TestPrBot": {
+    "userBlacklistForPR": ["Rafase282"],
+    "actions": ["opened", "reopened", "synchronize"],
+    "repoContribPath": "/blob/master/.github/CONTRIBUTING.md",
+    "rules": {
+      "critical": {
+        "blacklistedBaseBranchNames": [],
+        "blacklistedHeadBranchNames": [],
+        "allowedFileNames": ["[\\w\\d-]+\\.md$"]
+      },
+      "allowedBranchNames": [],
+      "closeKeywords": ["close", "closes", "closed", "fix", "fixes", "fixed", "resolve", "resolves", "resolved"],
+      "maxCommitCount": 1
+    }
+  }
+}
