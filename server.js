@@ -10,6 +10,7 @@
  */
 
 import { validatePullRequest } from './lib/validatePullRequest';
+import { translationReview } from './lib/translationReview';
 import {
   connectionValidator,
   bodyParser
@@ -22,6 +23,7 @@ app.use(connectionValidator);
 
 const work = async (body) => {
   validatePullRequest(body);
+  translationReview(body);
 };
 
 app.post('/', (req, res) => {
