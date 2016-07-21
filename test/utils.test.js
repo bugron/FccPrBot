@@ -37,6 +37,28 @@ describe('Testing utils', () => {
     it('Fail call getFiles function', () => {
       return expect(utils.getFiles(fakeGithubConfig)).to.be.rejected;
     });
+    it('getContent is a function', () => {
+      return expect(utils.getContent).to.be.function;
+    });
+    it('Successful call getContent function', (done) => {
+      utils.getContent({
+        user: 'bugron',
+        repo: 'TestPrBot',
+        path: 'file.json',
+        ref: 'audit/new-translation'
+      }).then((value) => {
+        done();
+        return expect(value).to.be.an('array');
+      });
+    });
+    it('Fail call getContent function', () => {
+      return expect(utils.getContent({
+        user: 'bugron',
+        repo: 'TestPrBot',
+        path: 'file.json1',
+        ref: 'audit/new-translation'
+      })).to.be.rejected;
+    });
     it('getCommits is a function', () => {
       return expect(utils.getCommits).to.be.function;
     });
@@ -54,6 +76,23 @@ describe('Testing utils', () => {
     });
     it('Test camelCase function to be false', () => {
       return expect(utils.camelCase('infix Caps', ' ')).to.be.false;
+    });
+    it('Call identifyTranslators', () => {
+      let data = require('fs')
+        .readFileSync('test/files/identifyTranslators.json'),
+      translationTeams = {
+        Es: ['vtamara', 'justinian336'],
+        Ru: ['bugron', 'alnero', 'rfprod'],
+        Fr: ['elazzabi', 'fnonga']
+      }, translators = [];
+      data = JSON.parse(data);
+      translators = translators.concat(
+        utils.identifyTranslators(data.challenges[1], translationTeams)
+      );
+      return expect(translators).to.be.instanceof(Array) &&
+        expect(translators).to
+          .include(...translationTeams['Ru'], ...translationTeams['Es']) &&
+        expect(translators).to.not.include(...translationTeams['Fr']);
     });
   });
 });
