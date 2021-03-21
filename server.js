@@ -9,36 +9,37 @@
  * @flow
  */
 
-import validatePullRequest from './lib/validatePullRequest';
-import {
-  connectionValidator,
-  bodyParser
-} from './lib/middleware';
+require('./lib/loadEnvVariables');
 
-const app = require('express')();
+const express = require('express');
 const path = require('path');
+const processPullRequest = require('./lib/processPullRequest');
+const payloadValidator = require('./lib/payloadValidator');
 
-app.use(bodyParser());
-app.use(connectionValidator);
+const app = express();
 
-const work = async (body) => {
-  validatePullRequest(body);
-};
-
-app.post('/', (req, res) => {
-  if (req.body) {
-    work(req.body).then(() => { res.end(); });
-  } else {
+app.post('/', express.json(), payloadValidator, (req, res, next) => {
+  if (!req.body) {
     res.status(400).end();
   }
+
+  processPullRequest(req.body)
+    .then(() => res.end())
+    .catch(next);
 });
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.set('port', process.env.PORT || 5000);
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).send('An internal error occured');
+});
 
-app.listen(app.get('port'), () => {
-  console.log('Listening on port', app.get('port'));
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log('Listening on port', PORT);
 });

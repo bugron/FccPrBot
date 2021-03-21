@@ -1,6 +1,10 @@
 {
-  "freeCodeCamp/freeCodeCamp": {
+  "bugron/TestPrBot": {
     "repoContribPath": "/blob/staging/CONTRIBUTING.md",
+    "closeAllPRsMessage": "Unfortunately, we do not accept any PRs at this time. Please, try later.",
+    "userForbiddenForPR": [
+      "*"
+    ],
     "userBlacklistForPR": [
         "greenkeeperio-bot",
         "QuincyLarson",
@@ -14,6 +18,9 @@
     ],
     "rules": {
       "critical": {
+        "allowedFileNames": [
+          "title"
+        ],
         "blacklistedBaseBranchNames": [
           "master"
         ],
