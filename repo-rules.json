@@ -6,10 +6,10 @@
       "*"
     ],
     "ignorePRFromUsers": [
-        "greenkeeperio-bot",
-        "QuincyLarson",
-        "BerkeleyTrue",
-        "snyk-bot"
+      "greenkeeperio-bot",
+      "QuincyLarson",
+      "BerkeleyTrue",
+      "snyk-bot"
     ],
     "actions": [
       "opened",
@@ -21,6 +21,10 @@
         "value": [
           "title"
         ],
+        "critical": true
+      },
+      "checkAssignedMilestone": {
+        "value": [],
         "critical": true
       },
       "forbiddenBaseBranchPatterns": {

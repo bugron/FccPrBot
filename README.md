@@ -34,7 +34,7 @@ And you are done. **Note that the bot must have write access to the repository t
 
 All configuration goes to `repo-rules.json` file. You can specify different configs for your repositories.
 
-```json
+```jsonc
 {
   "freeCodeCamp/camper-gh-bot": {
     "forbiddenPRUsers": [], // PRs made by users in this list will be closed. To close PRs from EVERYONE (except for users in the `ignorePRFromUsers` list) add an asterisk to this array: `"forbiddenPRUsers": ["*"]`
@@ -46,6 +46,7 @@ All configuration goes to `repo-rules.json` file. You can specify different conf
       "forbiddenBaseBranchPatterns": { "value": [], "critical": true }, // Do not open PR's against branches from this list
       "forbiddenHeadBranchPatterns": { "value": [], "critical": true }, // Do not open PR's from branches in this list
       "allowedFileNamePatterns": { "value": [], "critical": true } // Test all filenames against this (for expamle, "[\\w\\d-]+\\.md$"]). Close the PR if not all filenames satisfy this rule
+      "checkAssignedMilestone": { "value": [], "critical": true },
       "allowedHeadBranchPatterns": [], // Allowed branch name prefixes
       "forbiddenTitleKeywords": [], // Keywords which PR titles and commit messages should not contain
       "maxCommitCount": 1 // Max number of allowed commit messages count. If exceeded, bot will ask to squash commits.
