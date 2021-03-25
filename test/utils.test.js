@@ -1,3 +1,4 @@
+const { assert } = require('chai');
 const utils = require('../lib/utils');
 const chai = require('chai'),
   expect = chai.expect,
@@ -15,11 +16,20 @@ describe('Testing utils', () => {
     it('github is an object', () => {
       return expect(utils.github).to.be.an('object');
     });
-    it('Test camelCase function to be true', () => {
+    it('camelCase function to be true', () => {
       return expect(utils.camelCase('Infix-Caps', '-')).to.be.true;
     });
-    it('Test camelCase function to be false', () => {
+    it('camelCase function to be false', () => {
       return expect(utils.camelCase('infix Caps', ' ')).to.be.false;
+    });
+    it('getNormalizedRule function to return an object', () => {
+      return expect(utils.getNormalizedRule({ rules: { ruleName: 'HelloRule' } }, 'ruleName')).to.be.an('object');
+    });
+    it('getNormalizedRule function to return a rule', () => {
+      assert.deepEqual(utils.getNormalizedRule({ rules: { ruleName: 'HelloRule' } }, 'ruleName'), { value: 'HelloRule' });
+    });
+    it('getNormalizedRule should throw an error if no repo configuration is provided', () => {
+      expect(utils.getNormalizedRule).to.throw('No rules are provided');
     });
   });
 });

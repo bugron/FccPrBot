@@ -43,11 +43,9 @@ All configuration goes to `repo-rules.json` file. You can specify different conf
     "actions": [], // List of PR actions that camper-gh-bot will listen to
     "repoContribPath": "" // Path to your CONTRIBUTION.md file (should start with a slash, for example, /blob/master/.github/CONTRIBUTING.md)
     "rules": {
-      "critical": {
-        "forbiddenBaseBranchPatterns": [], // Do not open PR's against branches from this list
-        "forbiddenHeadBranchPatterns": [], // Do not open PR's from branches in this list
-        "allowedFileNamePatterns": [] // Test all filenames against this (for expamle, "[\\w\\d-]+\\.md$"]). Close the PR if not all filenames satisfy this rule
-      },
+      "forbiddenBaseBranchPatterns": { "value": [], "critical": true }, // Do not open PR's against branches from this list
+      "forbiddenHeadBranchPatterns": { "value": [], "critical": true }, // Do not open PR's from branches in this list
+      "allowedFileNamePatterns": { "value": [], "critical": true } // Test all filenames against this (for expamle, "[\\w\\d-]+\\.md$"]). Close the PR if not all filenames satisfy this rule
       "allowedHeadBranchPatterns": [], // Allowed branch name prefixes
       "forbiddenTitleKeywords": [], // Keywords which PR titles and commit messages should not contain
       "maxCommitCount": 1 // Max number of allowed commit messages count. If exceeded, bot will ask to squash commits.
@@ -55,6 +53,18 @@ All configuration goes to `repo-rules.json` file. You can specify different conf
   }
 }
 ```
+
+Rules can be written in two formats. The first one is directly specifying a value, eg.:
+```
+"forbiddenTitleKeywords": []
+```
+
+The second format is required to use when a rule should be defined as critical:
+```
+"forbiddenTitleKeywords": { "value": [], "critical": true }
+```
+
+`critical` means that if a PR violates a rule then the bot will close the PR.
 
 If you would like the camper-gh-bot to function on private repositories, set the `GITHUB_USER` and `GITHUB_PASSWORD` environment variables or add them to `.env` file. You must disable two-factor authentication or you will receive a console log like this: `Login to ${USERNAME} failed`.
 

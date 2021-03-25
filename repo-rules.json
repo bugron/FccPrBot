@@ -17,19 +17,26 @@
       "synchronize"
     ],
     "rules": {
-      "critical": {
-        "allowedFileNamePatterns": [
+      "allowedFileNamePatterns": {
+        "value": [
           "title"
         ],
-        "forbiddenBaseBranchPatterns": [
+        "critical": true
+      },
+      "forbiddenBaseBranchPatterns": {
+        "value": [
           "master"
         ],
-        "forbiddenHeadBranchPatterns": [
+        "critical": true
+      },
+      "forbiddenHeadBranchPatterns": {
+        "value": [
           "master",
           "staging",
           "backup/master",
           "backup/staging"
-        ]
+        ],
+        "critical": true
       },
       "allowedHeadBranchPatterns": [
         "bug/",
