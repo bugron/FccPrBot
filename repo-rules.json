@@ -2,10 +2,10 @@
   "bugron/TestPrBot": {
     "repoContribPath": "/blob/staging/CONTRIBUTING.md",
     "closeAllPRsMessage": "Unfortunately, we do not accept any PRs at this time. Please, try later.",
-    "userForbiddenForPR": [
+    "forbiddenPRUsers": [
       "*"
     ],
-    "userBlacklistForPR": [
+    "ignorePRFromUsers": [
         "greenkeeperio-bot",
         "QuincyLarson",
         "BerkeleyTrue",
@@ -18,20 +18,20 @@
     ],
     "rules": {
       "critical": {
-        "allowedFileNames": [
+        "allowedFileNamePatterns": [
           "title"
         ],
-        "blacklistedBaseBranchNames": [
+        "forbiddenBaseBranchPatterns": [
           "master"
         ],
-        "blacklistedHeadBranchNames": [
+        "forbiddenHeadBranchPatterns": [
           "master",
           "staging",
           "backup/master",
           "backup/staging"
         ]
       },
-      "allowedBranchNames": [
+      "allowedHeadBranchPatterns": [
         "bug/",
         "chore/",
         "fix/",
@@ -39,7 +39,7 @@
         "feature/",
         "translate/"
       ],
-      "closeKeywords": [
+      "forbiddenTitleKeywords": [
         "close",
         "closes",
         "closed",

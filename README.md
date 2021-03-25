@@ -28,28 +28,28 @@ npm install
 - Set your Secret key (the same as in `.env` file)
 - Add Webhook
 
-And you are done. **Note that bot must have write access to the repository to be able to close pull requests.**
+And you are done. **Note that the bot must have write access to the repository to be able to close pull requests.**
 
 ## Configuration
 
 All configuration goes to `repo-rules.json` file. You can specify different configs for your repositories.
 
-```js
+```json
 {
   "freeCodeCamp/camper-gh-bot": {
-    "userForbiddenForPR": [], // PRs made by users in this list will be closed. To close PRs from EVERYONE add a star symbol to this array: `"userForbiddenForPR": ["*"]`
-    "closeAllPRsMessage": "", // MUST be specified if `userForbiddenForPR` array contains a star sumbol (see above)
-    "userBlacklistForPR": [], // PRs made by users in this list will be ignored
+    "forbiddenPRUsers": [], // PRs made by users in this list will be closed. To close PRs from EVERYONE (except for users in the `ignorePRFromUsers` list) add an asterisk to this array: `"forbiddenPRUsers": ["*"]`
+    "closeAllPRsMessage": "", // MUST be specified if `forbiddenPRUsers` array contains a star sumbol (see above)
+    "ignorePRFromUsers": [], // PRs made by users in this list will be ignored
     "actions": [], // List of PR actions that camper-gh-bot will listen to
-    "repoContribPath": "" // Path to you CONTRIBUTION.md file (should start with a slash, for example, /blob/master/.github/CONTRIBUTING.md)
+    "repoContribPath": "" // Path to your CONTRIBUTION.md file (should start with a slash, for example, /blob/master/.github/CONTRIBUTING.md)
     "rules": {
       "critical": {
-        "blacklistedBaseBranchNames": [], // Do not open PR's against branches from this list
-        "blacklistedHeadBranchNames": [], // Do not open PR's from branches in this list
-        "allowedFileNames": [] // Test all filenames against this (for expamle, "[\\w\\d-]+\\.md$"). Close the PR if not all filenames satisfy this rule
+        "forbiddenBaseBranchPatterns": [], // Do not open PR's against branches from this list
+        "forbiddenHeadBranchPatterns": [], // Do not open PR's from branches in this list
+        "allowedFileNamePatterns": [] // Test all filenames against this (for expamle, "[\\w\\d-]+\\.md$"]). Close the PR if not all filenames satisfy this rule
       },
-      "allowedBranchNames": [], // Allowed branch name prefixes
-      "closeKeywords": [], //  Keywords which PR titles and commit messages should not contain
+      "allowedHeadBranchPatterns": [], // Allowed branch name prefixes
+      "forbiddenTitleKeywords": [], // Keywords which PR titles and commit messages should not contain
       "maxCommitCount": 1 // Max number of allowed commit messages count. If exceeded, bot will ask to squash commits.
     }
   }
