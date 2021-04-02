@@ -17,6 +17,10 @@
       "synchronize"
     ],
     "rules": {
+      "allowedBody": {
+        "value": [],
+        "critical": true
+      },
       "allowedFileNamePatterns": {
         "value": [
           "title"
